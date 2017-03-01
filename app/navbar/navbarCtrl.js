@@ -21,4 +21,18 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
 				$scope.isLoggedIn = false;
 			});
 		};
+
+		$scope.register = () => {
+	    	console.log("you clicked register");
+		    AuthFactory.createUser({
+		      email: $scope.account.email,
+		      password: $scope.account.password
+		    })
+		    .then( (userData) => {
+		      console.log("UserCtrl newUser:", userData );
+		      $scope.login();
+		    }, (error) => {
+		        console.log("Error creating user:", error);
+		    });
+	  	};
 	};
