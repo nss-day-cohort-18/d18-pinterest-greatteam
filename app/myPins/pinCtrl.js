@@ -11,7 +11,7 @@ app.controller('pinCtrl', function ($scope, FirebaseFactory, AuthFactory) {
         $scope.pins = pinCollection;
     });
 
-	FirebaseFactory.getUserPins(user).then(function(boardCollection){
+	FirebaseFactory.getUserBoards(user).then(function(boardCollection){
         $scope.boards = boardCollection;
     });
 
