@@ -3,7 +3,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
 		$scope.account = { email: '', password: '' };
 		$scope.isLoggedIn = false;
 
-		$scope.login = function() = {
+		$scope.loginUser = function() = {
 			console.log("you clicked login");
 	    	AuthFactory
 		    .loginUser($scope.account)
@@ -13,7 +13,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
 			});
 		};
 
-		$scope.logout = function() = {
+		$scope.logoutUser = function() = {
 			console.log("logout clicked");
 			AuthFactory.logoutUser()
 			.then(function(data){
