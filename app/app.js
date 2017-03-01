@@ -4,13 +4,11 @@ var app = angular.module("PinterestApp", ["ngRoute"]);
 
 
 app.config(function($routeProvider){
-    // $routeProvider.
-    // when('/', {
-    //     templateUrl: 'login/loginUser.html',
-    //     controller: 'LoginUserCtrl'
-
-    // }).
-    // otherwise('/home');
+    $routeProvider.
+    when('/', {
+        templateUrl: 'app/login/login.html'
+    }).
+    otherwise('/');
 });
 
 

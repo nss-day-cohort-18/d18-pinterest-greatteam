@@ -2,12 +2,13 @@
 <html ng-app="PinterestApp">
 <head>
 	<title>Pinterest Prototype</title>
-	<link rel="stylesheet" type="text/css" href="lib/node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-<body>
+<body ng-app="PinterestApp">
+	<div ng-include="'app/navbar/navbar.html'"></div>
+	<div ng-view></div>
 
-<h1>Pinterest</h1>
 
 
 
@@ -15,9 +16,9 @@
 
 
 <!-- Dependencies -->
-<script type="text/javascript" srsc="lib/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" srsc="dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/node_modules/angular/angular.min.js"></script>
-<script type="text/javascript" src="lib/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="dist/jquery.min.js"></script>
 <script type="text/javascript" src="lib/node_modules/firebase/firebase.js"></script>
 <script type="text/javascript" src="lib/node_modules/angular-route/angular-route.min.js"></script>
 
