@@ -2,6 +2,8 @@
 
 app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
+	var USERS_LOCATION = 'https://pinteret-project.firebaseio.com/users';
+
 	/****************************/
 	/****** BOARD FUNCTIONS *****/
 	/****************************/
@@ -123,9 +125,27 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	}
 
+	/*****************************/
+	/****** USER FUNCTIONS *******/
+	/*****************************/
+
+	let checkUserExists = function(uid){
+		return $q((resolve, reject) => {
+			// $http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${user}"`);
+			console.log("URL: ", FBCreds.databaseURL + "/users.json");
+			$http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${uid}"`)
+			.then( (userObject) => {
+				// console.log("UserObj: ", userObject);
+				resolve(userObject);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+		});
+	}
 
 
-	return {getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard};
+	return {getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists, checkIfUserExists};
 
 });
 
