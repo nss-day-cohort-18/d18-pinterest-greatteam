@@ -22,9 +22,42 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a id="register" href="#">Register</a></li>
-        <li class="active"><a id="login" href="#">Login</a></li>
+        <li><a ng-show="!isLoggedIn" href="#" ng-click="loginGoogle()">Login with Google</a></li>
+        <li><a ng-show="!isLoggedIn" href="#" data-toggle="modal" data-target="#loginRegister">Login/Register</a></li>
+        <li><a ng-show="isLoggedIn" ng-click="logout()" href="#!/logout">Logout</a></li>
+        <li><a ng-show="isLoggedIn" href="#!/explore" ng-click="">Explore</a></li>
+        <li><a ng-show="isLoggedIn" href="#!/profile" ng-click="">Profile</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="loginRegister">
+      <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Login/Register</h4>
+          </div>
+          <div class="modal-body">
+            <section class="form-group">
+              <h4>Please enter your information below</h4>
+              <div>
+                Email: <input class="form-control" type="text" autofocus="true"  ng-model="account.email">
+              </div>
+              <div>
+                Password: <input class="form-control" type="password" ng-model="account.password">
+              </div>
+            </section>
+          </div>
+          <div class="modal-footer">
+            
+            <button class="btn btn-info" ng-click="login()" data-dismiss="modal">Login</button>
+            <button class="btn btn-primary" ng-click="register()" data-dismiss="modal">Register</button>
+          </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </nav>
+
+
+
+
