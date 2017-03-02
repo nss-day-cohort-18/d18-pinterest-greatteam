@@ -9,14 +9,19 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
             .then(function(result) {
                 var user = result.user.uid;
                 console.log("user =", user);
-                console.log("DisplayName = ", result.user.displayName)
-                if (function(user){
-                	return FirebaseFactory.checkUserExists(user);
-                }) {
+                var displayName = result.user.displayName;
+                console.log("DisplayName = ", result.user.displayName);
+                FirebaseFactory.checkUserExists(user).then(function(result){
+                	var boolean = result
+                })
+                if (boolean) {
+                	console.log("it is true");
                 	$location.path("/profile");
                 	$scope.$apply();
                 } else {
+                	console.log("it is false");
                 	$scope.profile = {
+                		name: displayName,
                 		uid: user
                 	};
                 	$('#createUser').modal('show')
@@ -45,6 +50,9 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
 		    .then( (result) => {
 		    	var user = result.uid;
                 console.log("user =", user);
+                FirebaseFactory.checkUserExists(user).then(function(result){
+                	console.log(result.data)
+                })
 		        $window.location.href = "#!/";
 		        $scope.isLoggedIn = true;
 			});
