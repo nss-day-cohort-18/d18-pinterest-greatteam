@@ -9,8 +9,8 @@
         <h3>Add New Pin</h3>
         <input type="text" name="url" ng-model="newPin.url" placeholder="Url...">
         <input type="text" name="title" ng-model="newPin.title" placeholder="Title">
-        <select ng-model="newPin.board-id">
-          <option ng-repeat="item in boards" value="{{item.title}}">{{item.title}}</option>
+        <select ng-model="newPin.boardId">
+          <option ng-repeat="item in boards" value="{{item.id}}">{{item.title}}</option>
         </select>
         <button type="button" ng-click="makeNewPin()">Add!</button>
       </div>
@@ -18,7 +18,7 @@
   </div>
   <div class="col-sm-6 col-md-4" ng-repeat="item in pins">
     <div class="thumbnail">
-      <img src="{{item.url}}" alt="{{item.title}}">
+      <img ng-src="{{item.url}}" alt="{{item.title}}">
       <div class="caption">
         <h3>{{item.title}}</h3>
       </div>

@@ -16,7 +16,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
                     if (boolean) {
                     console.log("it is true");
                     $scope.isLoggedIn = true;
-                    $location.path("/profile");
+                    $location.path(`/${user}`);
                 } else {
                     console.log("it is false");
                     $scope.profile = {
@@ -43,7 +43,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
         $scope.createUser = function(profile){
         	console.log("profile info = ", profile)
             FirebaseFactory.createPinteretProfile(profile).then(function(){
-                $location.path("/profile");
+                $location.path(`/${profile.uid}`);
             });
         }
 
@@ -59,7 +59,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
                     if (boolean) {
                         console.log("it is true");
                         $scope.isLoggedIn = true;
-                        $location.path("/profile");
+                        $location.path(`/${user}`);
                     } else {
                         console.log("it is false");
                         $scope.profile = {
