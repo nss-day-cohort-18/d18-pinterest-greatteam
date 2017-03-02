@@ -123,22 +123,59 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	}
 
 	let getBoardPins = (boardID) => {
+		
 		let pins = [];
+
+let pinCollection;
+
+
+		// $Q request for all boards
+			// BoardsToEventuallyExtractNamesFrom = response.data;
 
 
 		return $q((resolve, reject) => {
 			console.log("URL: ", `${FBCreds.databaseURL}/pins/${boardID}`);
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardId"&equalTo="${boardID}"`)
 			.then((pinObject) => {
+				let boards = [];
+				let user = AuthFactory.getUser();
+				console.log(")))))))) USER: ", user);
+				getUserBoards(user)
+				.then( function(userBoards){
+					console.log("USER_BOARDS: ", userBoards);
+					boards = userBoards;
 
-				let pinCollection = pinObject.data;
 
-				resolve(pinCollection);
+					pinCollection = pinObject.data;
+					console.log("Collection: ", pinCollection);
+
+					console.log("BOARDS: ", boards);
+
+					
+					let pinVals = Object.values(pinCollection);
+
+					for(var i = 0; i < pinVals.length; i++){
+						var tempPin = pinVals[i];
+						console.log("Pin[i]: ", tempPin);
+						for(var j = 0; j < boards.length; j++){
+							console.log("Boards[i]: ", boards[j]);
+							if(tempPin.boardId === boards[j].id){
+								console.log("OBJECT TO GIVE KEY/VAL TO: ", pinCollection[tempPin]);
+							}else{
+
+							}
+						}
+					}
+
+					resolve(pinCollection);
+				});
 			})
 			.catch((error) => {
 				reject(error);
 			});
 		});
+
+
 	};
 
 	/*****************************/
