@@ -13,13 +13,13 @@ app.config(function($routeProvider){
 
 
 
-// app.run(($location, FBCreds) => {
-//     let creds = FBCreds;
-//     let authConfig = {
-//         apiKey: creds.apiKey,
-//         authDomain: creds.authDomain,
-//         databaseURL: creds.databaseURL
-//     };
+app.run(($location, FBCreds) => {
+    let creds = FBCreds;
+    let authConfig = {
+        apiKey: creds.apiKey,
+        authDomain: creds.authDomain,
+        databaseURL: creds.databaseURL
+    };
 
-//     firebase.initializeApp(authConfig);
-// });
+    firebase.initializeApp(authConfig);
+});
