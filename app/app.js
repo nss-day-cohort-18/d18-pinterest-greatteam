@@ -8,6 +8,18 @@ app.config(function($routeProvider){
     when('/', {
         templateUrl: 'app/login/login.html'
     }).
+    when('/:userID/boards', {
+        templateUrl: 'app/myBoards/boards.html'
+    }).
+    when('/:userID/pins', {
+        templateUrl: 'app/myPins/pins.html'
+    }).
+    when('/explore', {
+    templateUrl: 'app/explore/explore.html'
+    }).
+    when('/:userID', {
+    templateUrl: 'app/profile/profile.html'
+    }).
     otherwise('/');
 });
 
