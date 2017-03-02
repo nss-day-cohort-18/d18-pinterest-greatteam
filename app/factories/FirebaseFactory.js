@@ -12,7 +12,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		let user = AuthFactory.getUser();
 
 		return $q((resolve, reject) => {
-			// $http.get(`${FBCreds.databaseURL}/boards.json`)
 			$http.get(`${FBCreds.databaseURL}/boards.json?orderBy="uid"&equalTo="${user}"`)
 			.then((boardObject) => {
 				let boardCollection = boardObject.data;
@@ -96,7 +95,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 					pinCollection[key].id = key;
 					allPins.push(pinCollection[key]);
 				});
-				console.log("AllPins: ", allPins);
 				resolve(allPins);
 			})
 			.catch((error) => {
@@ -131,8 +129,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
 	let checkUserExists = function(uid){
 		return $q((resolve, reject) => {
-			// $http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${user}"`);
-			console.log("URL: ", FBCreds.databaseURL + "/users.json");
 			$http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${uid}"`)
 			.then( (userObject) => {
 
@@ -166,7 +162,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${userId}"`)
 			.then((userObject) => {
-				console.log("USER OBJECT: ", userObject.data);
 				resolve(userObject.data);
 			})
 			.catch((error) => {

@@ -1,7 +1,7 @@
 "use strict";
 
 app.controller('pinCtrl', function ($scope, FirebaseFactory, AuthFactory) {
-    $scope.user = AuthFactory.getUser();
+    let user = AuthFactory.getUser();
     $scope.newPin = {
     	uid: user
     };
