@@ -3,7 +3,9 @@
 app.controller('profileCtrl', function ($scope, FirebaseFactory, AuthFactory) {
     
     $scope.user = AuthFactory.getUser();
-    $scope.userData = FirebaseFactory.getUserData(user);
+    FirebaseFactory.getPinteretProfile(user).then(function(response){
+    	$scope.userData = response;
+    })
 
     
 });

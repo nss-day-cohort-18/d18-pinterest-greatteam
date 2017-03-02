@@ -1,4 +1,4 @@
-app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
+app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window){
 		//initialize navbar
 		$scope.account = { email: '', password: '' };
 		$scope.isLoggedIn = false;
@@ -8,8 +8,25 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
             AuthFactory.authWithProvider()
             .then(function(result) {
                 var user = result.user.uid;
-                $location.path("/profile");
-                $scope.$apply();
+                console.log("user =", user);
+                var displayName = result.user.displayName;
+                console.log("DisplayName = ", result.user.displayName);
+                FirebaseFactory.checkUserExists(user).then(function(result){
+                	boolean = result;
+                    if (boolean) {
+                    console.log("it is true");
+                    $scope.isLoggedIn = true;
+                    $location.path("/profile");
+                } else {
+                    console.log("it is false");
+                    $scope.profile = {
+                        name: displayName,
+                        uid: user
+                    };
+                    $('#createUser').modal('show')
+                }   
+                })
+                          
               }).catch(function(error) {
                 // Handle the Errors.
                 console.log("error with google login", error);
@@ -23,14 +40,35 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
               });
         };
 
+        $scope.createUser = function(profile){
+        	console.log("profile info = ", profile)
+            FirebaseFactory.createPinteretProfile(profile).then(function(){
+                $location.path("/profile");
+            });
+        }
+
 		$scope.loginUser = function() {
 			console.log("you clicked login");
 	    	AuthFactory
 		    .loginUser($scope.account)
-		    .then( () => {
-		        $window.location.href = "#!/";
-		        $scope.isLoggedIn = true;
-			});
+		    .then((result) => {
+		    	var user = result.uid;
+                console.log("user =", user);
+                FirebaseFactory.checkUserExists(user).then(function(result){
+                    boolean = result;
+                    if (boolean) {
+                        console.log("it is true");
+                        $scope.isLoggedIn = true;
+                        $location.path("/profile");
+                    } else {
+                        console.log("it is false");
+                        $scope.profile = {
+                            uid: user
+                        };
+                        $('#createUser').modal('show');
+                    }  
+                })
+		    })
 		};
 
 		$scope.logoutUser = function() {
