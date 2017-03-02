@@ -29,13 +29,18 @@ app.config(function($routeProvider){
         resolve: {isAuth}
     }).
     when('/:userID/pins', {
-        templateUrl: 'app/myPins/pins.html'
+        templateUrl: 'app/myPins/pins.html',
+        controller: "pinCtrl",
+        resolve: {isAuth}
     }).
     when('/explore', {
-    templateUrl: 'app/explore/explore.html'
+        templateUrl: 'app/explore/explore.html',
+        controller: "exploreCtrl"
     }).
     when('/:userID', {
-    templateUrl: 'app/profile/profile.html'
+        templateUrl: 'app/profile/profile.html',
+        controller: "profileCtrl",
+        resolve: {isAuth}
     }).
     otherwise('/');
 });

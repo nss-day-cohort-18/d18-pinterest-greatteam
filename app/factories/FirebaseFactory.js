@@ -162,11 +162,24 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	}
 
+	let getPinteretProfile = function(userId){
+		return $q((resolve, reject) => {
+			$http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${userId}"`)
+			.then((userObject) => {
+				console.log("USER OBJECT: ", userObject.data);
+				resolve(userObject.data);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+		});
+	}
 
 
 
 
-	return {createPinteretProfile, getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
+
+	return {getPinteretProfile, createPinteretProfile, getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
 
 });
 
