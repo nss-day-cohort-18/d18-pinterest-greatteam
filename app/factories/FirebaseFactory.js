@@ -153,7 +153,9 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
 
 
+
 	return {getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
 
 });
+
 
