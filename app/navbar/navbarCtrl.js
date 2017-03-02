@@ -42,6 +42,9 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
 
         $scope.createUser = function(profile){
         	console.log("profile info = ", profile)
+            FirebaseFactory.createPinteretProfile(profile).then(function(){
+                $location.path("/profile");
+            });
         }
 
 		$scope.loginUser = function() {
