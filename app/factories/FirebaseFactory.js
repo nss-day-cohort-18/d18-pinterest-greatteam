@@ -135,8 +135,15 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 			console.log("URL: ", FBCreds.databaseURL + "/users.json");
 			$http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${uid}"`)
 			.then( (userObject) => {
-				// console.log("UserObj: ", userObject);
-				resolve(userObject);
+
+				console.log("UserObject: ", userObject);
+
+				var userObjLength = Object.keys(userObject.data).length;
+
+				if(userObjLength === 1){
+					resolve(true);
+				}
+				resolve(false);
 			})
 			.catch((error) => {
 				reject(error);
@@ -145,8 +152,10 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	}
 
 
-	return {getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists, checkIfUserExists};
+
+
+	return {getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
 
 });
 
-//console.firebase.google.com/project/pinteret-project/database/data/pins/-KeAaLEuDtZtur6Zj7RD
+
