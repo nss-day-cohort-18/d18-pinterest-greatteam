@@ -37,10 +37,15 @@ app.config(function($routeProvider){
         templateUrl: 'app/explore/explore.html',
         controller: "exploreCtrl"
     }).
+
     when('/:userID', {
         templateUrl: 'app/profile/profile.html',
         controller: "profileCtrl",
         resolve: {isAuth}
+    }).
+    when('/boards/:boardID', {
+        templateUrl: "app/singleBoardView/singleBoard.html",
+        controller: "SingleBoardCtrl"
     }).
     otherwise('/');
 });
