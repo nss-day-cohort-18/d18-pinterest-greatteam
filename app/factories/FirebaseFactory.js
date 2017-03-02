@@ -151,10 +151,21 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	}
 
+	let createNewUser = function(profile){
+		return $q((resolve, reject) => {
+			$http.post(`${FBCreds.databaseURL}/users.json`, JSON.stringify(profile))
+			.then((ObjectFromFirebase) => {
+				resolve(ObjectFromFirebase);
+			}).catch((error) => {
+				reject(error);
+			});
+		});
+	}
 
 
 
-	return {getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
+
+	return {createNewUser, getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
 
 });
 
