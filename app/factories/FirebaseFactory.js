@@ -88,7 +88,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/pins.json`)
-			//$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="uid"&equalTo="${user}"`)
 			.then((pinObject) => {
 				let pinCollection = pinObject.data;
 				Object.keys(pinCollection).forEach((key) => {
@@ -122,6 +121,27 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 			});
 		});
 	}
+
+	let getBoardPins = (boardID) => {
+		let pins = [];
+
+
+		return $q((resolve, reject) => {
+			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardId"&equalTo="${boardID}"`)
+			.then((pinObject) => {
+				let pinCollection = pinObject.data;
+				Object.keys(pinCollection).forEach((key) => {
+					pinCollection[key].id = key;
+					pins.push(pinCollection[key]);
+				});
+				console.log("Pins: ", pins);
+				resolve(pins);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+		});
+	};
 
 	/*****************************/
 	/****** USER FUNCTIONS *******/
@@ -174,7 +194,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
 
 
-	return {getPinteretProfile, createPinteretProfile, getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
+	return {getBoardPins, getPinteretProfile, createPinteretProfile, getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
 
 });
 
