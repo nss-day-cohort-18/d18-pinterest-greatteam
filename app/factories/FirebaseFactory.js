@@ -127,15 +127,13 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
 
 		return $q((resolve, reject) => {
+			console.log("URL: ", `${FBCreds.databaseURL}/pins/${boardID}`);
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardId"&equalTo="${boardID}"`)
 			.then((pinObject) => {
+
 				let pinCollection = pinObject.data;
-				Object.keys(pinCollection).forEach((key) => {
-					pinCollection[key].id = key;
-					pins.push(pinCollection[key]);
-				});
-				console.log("Pins: ", pins);
-				resolve(pins);
+
+				resolve(pinCollection);
 			})
 			.catch((error) => {
 				reject(error);

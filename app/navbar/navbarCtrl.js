@@ -8,6 +8,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
             AuthFactory.authWithProvider()
             .then(function(result) {
                 var user = result.user.uid;
+                $scope.user = result.user.uid;
                 console.log("user =", user);
                 var displayName = result.user.displayName;
                 console.log("DisplayName = ", result.user.displayName);
