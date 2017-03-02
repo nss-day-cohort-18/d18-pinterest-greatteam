@@ -26,4 +26,10 @@ app.controller('pinCtrl', function ($scope, FirebaseFactory, AuthFactory) {
 		});	
     };
 
+    $scope.deletePin = function(index){
+        FirebaseFactory.deletePin(this.item.id).then(function(){
+            $scope.pins.splice(index, 1);
+        })
+    }
+
 });
