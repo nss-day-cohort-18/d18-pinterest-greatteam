@@ -1,7 +1,7 @@
 "use strict";
 
 app.constant('FBCreds', {
-	apiKey: "",
-	authDomain: "",
-	databaseURL: ""
+    apiKey: "AIzaSyD4qV-JcPLklBETJIPkFvfLl0Hj62uaqgI",
+    authDomain: "pinteret-project.firebaseapp.com",
+    databaseURL: "https://pinteret-project.firebaseio.com"
 });

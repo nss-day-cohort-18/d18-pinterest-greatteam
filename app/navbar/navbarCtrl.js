@@ -1,4 +1,4 @@
-app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
+app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window){
 		//initialize navbar
 		$scope.account = { email: '', password: '' };
 		$scope.isLoggedIn = false;
@@ -8,8 +8,19 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
             AuthFactory.authWithProvider()
             .then(function(result) {
                 var user = result.user.uid;
-                $location.path("/profile");
-                $scope.$apply();
+                console.log("user =", user);
+                console.log("DisplayName = ", result.user.displayName)
+                if (function(user){
+                	return FirebaseFactory.checkUserExists(user);
+                }) {
+                	$location.path("/profile");
+                	$scope.$apply();
+                } else {
+                	$scope.profile = {
+                		uid: user
+                	};
+                	$('#createUser').modal('show')
+                }             
               }).catch(function(error) {
                 // Handle the Errors.
                 console.log("error with google login", error);
@@ -23,11 +34,17 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
               });
         };
 
+        $scope.createUser = function(profile){
+        	console.log("profile info = ", $scope.profile, profile)
+        }
+
 		$scope.loginUser = function() {
 			console.log("you clicked login");
 	    	AuthFactory
 		    .loginUser($scope.account)
-		    .then( () => {
+		    .then( (result) => {
+		    	var user = result.uid;
+                console.log("user =", user);
 		        $window.location.href = "#!/";
 		        $scope.isLoggedIn = true;
 			});
@@ -50,7 +67,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
 		    })
 		    .then( (userData) => {
 		      console.log("UserCtrl newUser:", userData );
-		      $scope.login();
+		      $scope.loginUser();
 		    }, (error) => {
 		        console.log("Error creating user:", error);
 		    });
