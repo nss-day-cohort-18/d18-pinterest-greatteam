@@ -50,7 +50,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory){
 		    })
 		    .then( (userData) => {
 		      console.log("UserCtrl newUser:", userData );
-		      $scope.login();
+		      $scope.loginUser();
 		    }, (error) => {
 		        console.log("Error creating user:", error);
 		    });
