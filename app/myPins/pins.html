@@ -21,6 +21,8 @@
       <img ng-src="{{item.url}}" alt="{{item.title}}">
       <div class="caption">
         <h3>{{item.title}}</h3>
+        <button type="button" ng-click="deletePin($index)">DELETE</button>
+
       </div>
     </div>
   </div>
