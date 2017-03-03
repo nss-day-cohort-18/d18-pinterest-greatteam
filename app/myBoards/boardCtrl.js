@@ -14,6 +14,7 @@ app.controller('BoardCtrl', function ($scope, FirebaseFactory, AuthFactory) {
     console.log("NewBoard: ", $scope.newBoard);
 
     FirebaseFactory.getUserBoards(user).then(function(boardCollection){
+        console.log("BOARD COLLECTION: ", boardCollection);
         $scope.boards = boardCollection;
     });
 
