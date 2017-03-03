@@ -142,6 +142,14 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	let getBoardPins = (boardID) => {
 		let pinCollection;
 
+		AuthFactory.isAuthenticated()
+		.then( function(userAuthenticated){
+			console.log("User Authenticated: ", userAuthenticated);
+		})
+		.catch( function(userNotAuthenticated){
+			console.log("NOT: ", userNotAuthenticated);
+		});
+
 		return $q((resolve, reject) => {
 			console.log("URL: ", `${FBCreds.databaseURL}/pins/${boardID}`);
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardId"&equalTo="${boardID}"`)
