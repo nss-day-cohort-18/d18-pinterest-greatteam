@@ -26,7 +26,7 @@
         <li><a ng-show="!isLoggedIn" href="#" data-toggle="modal" data-target="#loginRegister">Login/Register</a></li>
         <li><a ng-show="isLoggedIn" ng-click="logout()" href="#!/logout">Logout</a></li>
         <li><a ng-show="isLoggedIn" href="#!/explore" ng-click="">Explore</a></li>
-        <li><a ng-show="isLoggedIn" href="#!/profile" ng-click="">Profile</a></li>
+        <li><a ng-show="isLoggedIn" href="#!/{{user}}" ng-click="">Profile</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
