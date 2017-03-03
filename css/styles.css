@@ -1,16 +1,11 @@
 * {
   text-align: center; }
 
-.jumbotron {
-  margin-right: 20px;
-  margin-left: 20px; }
-
+.thumbnail{
+	height: 25em;
+	overflow: scroll;
+}
+img{
+	max-height: 17em;
+}
 /*# sourceMappingURL=styles.css.map */
-
-a:link {
-	text-decoration: none;
-}
-
-#profile-display a:hover {
-	text-decoration: none;
-}
