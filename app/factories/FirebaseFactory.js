@@ -127,7 +127,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		
 		let pins = [];
 
-let pinCollection;
+		let pinCollection;
 
 
 		// $Q request for all boards

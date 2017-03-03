@@ -15,11 +15,10 @@ app.controller("SingleBoardCtrl", function($scope, AuthFactory, FirebaseFactory,
     	$scope.name = boardPins.boardName;
     	var pins = Object.values(boardPins);
 
-        console.log("PINS: ", pins);
     	var newPins = pins.slice(0, pins.length - 1);
-        console.log("AFTER PINS: ", newPins);
+        console.log("AFTER SLICE: ", newPins);
 
-    	$scope.pins = pins;
+    	$scope.pins = newPins;
 
 
 
