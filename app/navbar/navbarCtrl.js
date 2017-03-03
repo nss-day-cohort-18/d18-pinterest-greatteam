@@ -1,7 +1,9 @@
-app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window){
+app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window, SearchTermData){
 		//initialize navbar
 		$scope.account = { email: '', password: '' };
 		$scope.isLoggedIn = false;
+
+        $scope.searchText = SearchTermData;
 
 		$scope.loginGoogle = function() {
             console.log("you clicked login with Google");

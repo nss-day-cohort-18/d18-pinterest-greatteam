@@ -1,6 +1,8 @@
 "use strict";
 
-app.controller('exploreCtrl', function ($scope, FirebaseFactory) {
+app.controller('exploreCtrl', function ($scope, FirebaseFactory, SearchTermData) {
+
+	$scope.searchText = SearchTermData;
     
     FirebaseFactory.getAllPins().then(function(pinCollection){
         $scope.pins = pinCollection;
