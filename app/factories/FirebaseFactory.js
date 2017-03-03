@@ -113,6 +113,16 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	};
 
+	let editPin = (pinId, editedPin) =>{
+		return $q((resolve)=>{
+			$http.patch(`${FBCreds.databaseURL}/pins/${pinId}.json`,
+				angular.toJson(editedPin))
+			.then((response)=>{
+				resolve(response);
+			});
+		});
+	};
+
 	let deletePin = function(pinId){
 		return $q((resolve, reject) => {
 			$http.delete(`${FBCreds.databaseURL}/pins/${pinId}.json`)
@@ -192,7 +202,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
 
 
-	return {getBoardPins, getPinteretProfile, createPinteretProfile, getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
+	return {editPin, getBoardPins, getPinteretProfile, createPinteretProfile, getUserBoards, getAllPins, getUserPins, createNewPin, createNewBoard, deletePin, deleteBoard, checkUserExists};
 
 });
 
