@@ -20,9 +20,6 @@ app.controller("SingleBoardCtrl", function($scope, AuthFactory, FirebaseFactory,
 
     	$scope.pins = newPins;
 
-
-
-
     })
 
 });
