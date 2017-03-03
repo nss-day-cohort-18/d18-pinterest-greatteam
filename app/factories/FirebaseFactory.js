@@ -7,6 +7,8 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	/****************************/
 	/****** BOARD FUNCTIONS *****/
 	/****************************/
+	
+	// Retrieves all boards (for the logged in user)
 	let getUserBoards = () => {
 		let boards = [];
 		let user = AuthFactory.getUser();
@@ -28,6 +30,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	};
 
+	// Creates a new board in Firebase/boards
 	let createNewBoard = function(newBoard){
 		return $q((resolve, reject) => {
 			$http.post(`${FBCreds.databaseURL}/boards.json`, JSON.stringify(newBoard))
@@ -39,7 +42,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 
 	};
-
+	// Deletes a board from Firebase/boards
 	let deleteBoard = function(boardId){
 		return $q((resolve, reject) => {
 			$http.delete(`${FBCreds.databaseURL}/boards/${boardId}.json`)
@@ -61,6 +64,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	/****** PIN FUNCTIONS *******/
 	/****************************/
 
+	// Get all pins for the logged in user
 	let getUserPins = () => {
 		let pins = [];
 		let user = AuthFactory.getUser();
@@ -83,6 +87,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	};
 
+	// Get ALL pins (regardless of user that is logged in)
 	let getAllPins = () => {
 		let allPins = [];
 		let user = AuthFactory.getUser();
@@ -103,6 +108,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	};
 
+	// Creates new pin in Firebase/pins
 	let createNewPin = (newPin) => {
 		return $q((resolve, reject) => {
 			$http.post(`${FBCreds.databaseURL}/pins.json`, JSON.stringify(newPin))
@@ -114,6 +120,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	};
 
+	// Deletes one pin from Firebase/pins
 	let deletePin = function(pinId){
 		return $q((resolve, reject) => {
 			$http.delete(`${FBCreds.databaseURL}/pins/${pinId}.json`)
@@ -123,16 +130,9 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	}
 
+	// Gets a single board's pins
 	let getBoardPins = (boardID) => {
-		
-		let pins = [];
-
 		let pinCollection;
-
-
-		// $Q request for all boards
-			// BoardsToEventuallyExtractNamesFrom = response.data;
-
 
 		return $q((resolve, reject) => {
 			console.log("URL: ", `${FBCreds.databaseURL}/pins/${boardID}`);
@@ -140,36 +140,27 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 			.then((pinObject) => {
 				let boards = [];
 				let user = AuthFactory.getUser();
-				console.log(")))))))) USER: ", user);
 				getUserBoards(user)
 				.then( function(userBoards){
-					console.log("USER_BOARDS: ", userBoards);
 					boards = userBoards;
 
 
 					pinCollection = pinObject.data;
 					console.log("Collection: ", pinCollection);
 
-					console.log("BOARDS: ", boards);
-
-					// Get array of values fro mpinCollection
+					// Get array of values (to iterate through and get values from)
 					let pinVals = Object.values(pinCollection);
+					let boardVals = Object.values(boards);
 
-					// Loop through pins and boards to get the board name 
-					for(var i = 0; i < pinVals.length; i++){
-						var tempPin = pinVals[i];
-						for(var j = 0; j < boards.length; j++){
-							if(tempPin.boardId === boards[j].id){
-								// Adds a key/val (name of board) pair to the object that is eventually resolved
-								pinCollection.boardName = boards[j].title;
-								console.log("OBJECT TO GIVE KEY/VAL TO: ", pinCollection.boardName);
-							}else{
+					// Get boardID from first object in pin array
+					var boardToGetNameFrom = pinVals[0].boardId;
 
-							}
+					// If a board's ID matches a pin's boardId, add it as a key/val pair to the object that is resolved
+					for(var k = 0; k < boardVals.length; k++){
+						if(boardVals[k].id === boardToGetNameFrom){
+							pinCollection.boardName = boardVals[k].title;
 						}
 					}
-
-					console.log("PinCollection: ", pinCollection);
 					resolve(pinCollection);
 				});
 			})
@@ -185,6 +176,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	/****** USER FUNCTIONS *******/
 	/*****************************/
 
+	// Resolves true/false based on if the user PROFILE exists in our database
 	let checkUserExists = function(uid){
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${uid}"`)
@@ -204,7 +196,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 			});
 		});
 	}
-
+	// Adds record to database/users.json 
 	let createPinteretProfile = function(profile){
 		return $q((resolve, reject) => {
 			$http.post(`${FBCreds.databaseURL}/users.json`, JSON.stringify(profile))
@@ -216,6 +208,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 	}
 
+	// Retrieves record from database/users.json 
 	let getPinteretProfile = function(userId){
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/users.json?orderBy="uid"&equalTo="${userId}"`)
