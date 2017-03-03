@@ -56,6 +56,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 
 
 
+
 	/****************************/
 	/****** PIN FUNCTIONS *******/
 	/****************************/
@@ -151,22 +152,24 @@ let pinCollection;
 
 					console.log("BOARDS: ", boards);
 
-					
+					// Get array of values fro mpinCollection
 					let pinVals = Object.values(pinCollection);
 
+					// Loop through pins and boards to get the board name 
 					for(var i = 0; i < pinVals.length; i++){
 						var tempPin = pinVals[i];
-						console.log("Pin[i]: ", tempPin);
 						for(var j = 0; j < boards.length; j++){
-							console.log("Boards[i]: ", boards[j]);
 							if(tempPin.boardId === boards[j].id){
-								console.log("OBJECT TO GIVE KEY/VAL TO: ", pinCollection[tempPin]);
+								// Adds a key/val (name of board) pair to the object that is eventually resolved
+								pinCollection.boardName = boards[j].title;
+								console.log("OBJECT TO GIVE KEY/VAL TO: ", pinCollection.boardName);
 							}else{
 
 							}
 						}
 					}
 
+					console.log("PinCollection: ", pinCollection);
 					resolve(pinCollection);
 				});
 			})
