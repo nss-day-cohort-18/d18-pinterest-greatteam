@@ -7,7 +7,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	/****************************/
 	/****** BOARD FUNCTIONS *****/
 	/****************************/
-	
+
 	// Retrieves all boards (for the logged in user)
 	let getUserBoards = () => {
 		let boards = [];
@@ -52,11 +52,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 
 	};
-
-
-
-
-
 
 
 
