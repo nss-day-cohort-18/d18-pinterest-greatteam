@@ -12,7 +12,14 @@ app.controller("SingleBoardCtrl", function($scope, AuthFactory, FirebaseFactory,
     .then( function(boardPins){
     	console.log("BoardPins: ", boardPins);
 
-    	$scope.pins = Object.values(boardPins);
+    	$scope.name = boardPins.boardName;
+    	var pins = Object.values(boardPins);
+
+    	pins.splice(pins.length, 1);
+
+    	$scope.pins = pins;
+
+
 
 
     })
