@@ -111,7 +111,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	// Creates new pin in Firebase/pins
 	let createNewPin = (newPin) => {
 		return $q((resolve, reject) => {
-			$http.post(`${FBCreds.databaseURL}/pins.json`, JSON.stringify(newPin))
+			$http.post(`${FBCreds.databaseURL}/pins.json`, angular.toJson(newPin))
 			.then((ObjectFromFirebase) => {
 				resolve(ObjectFromFirebase);
 			}).catch((error) => {
