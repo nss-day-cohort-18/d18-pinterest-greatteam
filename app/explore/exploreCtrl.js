@@ -1,12 +1,17 @@
 "use strict";
 
-app.controller('exploreCtrl', function ($scope, FirebaseFactory, AuthFactory) {
+app.controller('exploreCtrl', function ($scope, FirebaseFactory, SearchTermData, AuthFactory) {
+
+	$scope.searchText = SearchTermData;
+
+
+
     $scope.user = AuthFactory.getUser();
 
     $scope.userFilter = function(item){
-    	return item.uid == $scope.user;
+        return item.uid == $scope.user;
     }
-
+    
     FirebaseFactory.getAllPins().then(function(pinCollection){
         $scope.pins = pinCollection;
     });
@@ -22,8 +27,9 @@ app.controller('exploreCtrl', function ($scope, FirebaseFactory, AuthFactory) {
     };
 
     $scope.addExplorePin = function(){
-    	FirebaseFactory.createNewPin($scope.explorePin).then(function(){
-
+    	FirebaseFactory.createNewPin($scope.explorePin).then(function(){ 
     	})
-    }
+    };
+
+
 });

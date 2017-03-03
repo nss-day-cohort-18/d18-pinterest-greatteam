@@ -1,8 +1,14 @@
-app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window, $routeParams){
+
+app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window, $routeParams, SearchTermData){
+
 		//initialize navbar
 		$scope.account = { email: '', password: '' };
 		$scope.isLoggedIn = false;
         $scope.myPath = $routeParams.userID;
+
+        $scope.isExploreView = false;
+
+        $scope.searchText = SearchTermData;
 
 		$scope.loginGoogle = function() {
             console.log("you clicked login with Google");
@@ -16,6 +22,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
                 FirebaseFactory.checkUserExists(user).then(function(result){
                     boolean = result;
                     if (boolean) {
+                        $scope.isExploreView = false;
                         console.log("it is true");
                         $scope.isLoggedIn = true;
                         $location.path(`/${user}`);
@@ -98,4 +105,12 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
 		        console.log("Error creating user:", error);
 		    });
 	  	};
+
+        $scope.showSearch = function(){
+            $scope.isExploreView = true;
+        }
+
+        $scope.hideSearch = function(){
+            $scope.isExploreView = false;
+        }
 	});
