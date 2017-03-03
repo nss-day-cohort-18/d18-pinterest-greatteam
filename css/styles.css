@@ -2,3 +2,11 @@
   text-align: center; }
 
 /*# sourceMappingURL=styles.css.map */
+
+a:link {
+	text-decoration: none;
+}
+
+#profile-display a:hover {
+	text-decoration: none;
+}
