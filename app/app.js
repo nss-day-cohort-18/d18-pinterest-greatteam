@@ -44,7 +44,8 @@ app.config(function($routeProvider){
     }).
     when('/boards/:boardID', {
         templateUrl: "app/singleBoardView/singleBoard.html",
-        controller: "SingleBoardCtrl"
+        controller: "SingleBoardCtrl",
+        resolve: {isAuth}
     }).
     otherwise('/');
 });

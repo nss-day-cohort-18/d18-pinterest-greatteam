@@ -7,7 +7,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	/****************************/
 	/****** BOARD FUNCTIONS *****/
 	/****************************/
-	
+
 	// Retrieves all boards (for the logged in user)
 	let getUserBoards = () => {
 		let boards = [];
@@ -33,7 +33,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	// Creates a new board in Firebase/boards
 	let createNewBoard = function(newBoard){
 		return $q((resolve, reject) => {
-			$http.post(`${FBCreds.databaseURL}/boards.json`, JSON.stringify(newBoard))
+			$http.post(`${FBCreds.databaseURL}/boards.json`,  angular.toJson(newBoard))
 			.then((ObjectFromFirebase) => {
 				resolve(ObjectFromFirebase);
 			}).catch((error) => {
@@ -52,11 +52,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 
 	};
-
-
-
-
-
 
 
 
@@ -147,6 +142,14 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	let getBoardPins = (boardID) => {
 		let pinCollection;
 
+		AuthFactory.isAuthenticated()
+		.then( function(userAuthenticated){
+			console.log("User Authenticated: ", userAuthenticated);
+		})
+		.catch( function(userNotAuthenticated){
+			console.log("NOT: ", userNotAuthenticated);
+		});
+
 		return $q((resolve, reject) => {
 			console.log("URL: ", `${FBCreds.databaseURL}/pins/${boardID}`);
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardId"&equalTo="${boardID}"`)
@@ -165,6 +168,13 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 					let pinVals = Object.values(pinCollection);
 					let boardVals = Object.values(boards);
 
+					console.log("VALS: ", pinVals);
+
+					if(pinVals.length === 0){
+						pinCollection.boardName = "No Pins Yet!"
+						resolve(pinCollection);
+					}else{
+
 					// Get boardID from first object in pin array
 					var boardToGetNameFrom = pinVals[0].boardId;
 
@@ -175,7 +185,9 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 						}
 					}
 					resolve(pinCollection);
+					}
 				});
+
 			})
 			.catch((error) => {
 				reject(error);
