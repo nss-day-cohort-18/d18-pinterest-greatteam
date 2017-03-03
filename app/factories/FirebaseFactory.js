@@ -33,7 +33,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	// Creates a new board in Firebase/boards
 	let createNewBoard = function(newBoard){
 		return $q((resolve, reject) => {
-			$http.post(`${FBCreds.databaseURL}/boards.json`, JSON.stringify(newBoard))
+			$http.post(`${FBCreds.databaseURL}/boards.json`,  angular.toJson(newBoard))
 			.then((ObjectFromFirebase) => {
 				resolve(ObjectFromFirebase);
 			}).catch((error) => {
@@ -168,6 +168,13 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 					let pinVals = Object.values(pinCollection);
 					let boardVals = Object.values(boards);
 
+					console.log("VALS: ", pinVals);
+
+					if(pinVals.length === 0){
+						pinCollection.boardName = "No Pins Yet!"
+						resolve(pinCollection);
+					}else{
+
 					// Get boardID from first object in pin array
 					var boardToGetNameFrom = pinVals[0].boardId;
 
@@ -178,7 +185,9 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 						}
 					}
 					resolve(pinCollection);
+					}
 				});
+
 			})
 			.catch((error) => {
 				reject(error);
