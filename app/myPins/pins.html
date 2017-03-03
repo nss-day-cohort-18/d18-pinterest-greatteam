@@ -12,7 +12,7 @@
           <select ng-model="newPin.boardId">
             <option ng-repeat="item in boards" value="{{item.id}}">{{item.title}}</option>
           </select>
-          <button type="button" class="btn-xs btn-success" ng-click="makeNewPin()">Add!</button>
+          <button type="button" class="btn-xs btn" ng-click="makeNewPin()">Add!</button>
         </div>
       </div>
     </div>
@@ -21,9 +21,9 @@
         <a href="{{item.url}}" target="_blank"><img ng-src="{{item.url}}" alt="{{item.title}}"></a>
         <div class="caption">
           <h3>{{item.title}}</h3>
-          <button type="button" class="btn-xs btn-info" ng-click="openEditModal()">Edit</button>
+          <button type="button" class="btn-xs btn" ng-click="openEditModal()">Edit</button>
 
-          <button type="button" class="btn-xs btn-danger" ng-click="deletePin($index)">DELETE</button>
+          <button type="button" class="btn-xs btn" ng-click="deletePin($index)">DELETE</button>
 
         </div>
       </div>

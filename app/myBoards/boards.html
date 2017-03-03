@@ -8,15 +8,16 @@
         <div class="caption">
           <h3>Add New Boards</h3>
           <input type="text" name="title" ng-model="newBoard.title" placeholder="Title">
-          <button type="button" class="btn-xs btn-success" ng-click="makeNewBoard()">Add!</button>
+          <button type="button" class="btn-xs btn" ng-click="makeNewBoard()">Add!</button>
         </div>
       </div>
     </div>
     <div class="col-sm-6 col-md-4" ng-repeat="item in boards">
       <div class="thumbnail">
+      <a ng-href="/#!/boards/{{item.id}}"><img ng-src="http://vignette2.wikia.nocookie.net/uaoacccensorship/images/0/0c/Notice-board.jpg/revision/latest/scale-to-width-down/640?cb=20141107004536" alt="{{item.title}}"></a>
         <div class="caption">
           <h3><a ng-href="/#!/boards/{{item.id}}">{{item.title}}</a></h3>
-          <button type="button" class="btn-xs btn-danger" ng-click="deleteBoard($index)">Delete</button>
+          <button type="button" class="btn-xs btn" ng-click="deleteBoard($index)">Delete</button>
         </div>
       </div>
     </div>
