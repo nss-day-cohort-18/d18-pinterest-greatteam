@@ -1,5 +1,30 @@
+$primary-color: #233d4d;
+$accent-color: #fe7f2d;
+
+
+
 * {
  	text-align: center;
-
 }
 
+.thumbnail{
+	height: 25em;
+	overflow: scroll;
+	background-color: $accent-color;
+	border: 2px solid $primary-color;
+	
+}
+img{
+	max-height: 17em;
+	border: 2px solid $primary-color;
+	border-radius: 10px;
+}
+
+html{
+	background-color: $primary-color;
+}
+
+.btn-xs {
+	background-color: $primary-color;
+	color: #fff;
+}
