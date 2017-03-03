@@ -3,3 +3,43 @@
 
 }
 
+#img-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-right: -40px;
+
+}
+
+#user-img{
+	height: 200px;
+	width: 200px;
+	max-height: 200px;
+	max-width: 200px;
+
+
+}
+#prof-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+#prof-button-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 2%;
+ }
+
+ #go-to-boards{
+ 	margin-right: 10px;
+ }
+
+ #go-to-pins{
+ 	margin-left: 10px;
+ }

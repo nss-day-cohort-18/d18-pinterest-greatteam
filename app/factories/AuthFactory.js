@@ -35,6 +35,8 @@ app.factory("AuthFactory", function(){
 		return new Promise ( (resolve, reject) => {
 			firebase.auth().onAuthStateChanged( (user) => {
 				if (user){
+					console.log("MY USER: ", user);
+					console.log("USER PHOTO: ", user.photoURL);
 					currentUser = user.uid;
 					resolve(true);
 				}else {
@@ -43,6 +45,21 @@ app.factory("AuthFactory", function(){
 			});
 		});
 	};
+
+	let getUserPhoto = function(){
+		return new Promise ( (resolve, reject) => {
+			firebase.auth().onAuthStateChanged( (user) => {
+				if (user){
+					console.log("MY USER: ", user);
+					console.log("USER PHOTO: ", user.photoURL);
+					currentUser = user.uid;
+					resolve(user.photoURL);
+				}else {
+					resolve(false);
+				}
+			});
+		});
+	}
 
 	let getUser = function(){
 		return currentUser;
@@ -62,5 +79,5 @@ app.factory("AuthFactory", function(){
 
 
 
-	return {createUser, loginUser, logoutUser, isAuthenticated, getUser, authWithProvider};
+	return {getUserPhoto, createUser, loginUser, logoutUser, isAuthenticated, getUser, authWithProvider};
 });

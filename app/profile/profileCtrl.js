@@ -8,5 +8,11 @@ app.controller('profileCtrl', function ($scope, FirebaseFactory, AuthFactory, $r
     	console.log("Response: ", response);
     	$scope.userData = response;
     });
+
+    AuthFactory.getUserPhoto()
+    .then( function(userPhoto){
+    	console.log("PHOTO: ", userPhoto);
+    	$scope.userPhoto = userPhoto;
+    })
     
 });
