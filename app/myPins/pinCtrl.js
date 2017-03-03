@@ -32,4 +32,18 @@ app.controller('pinCtrl', function ($scope, FirebaseFactory, AuthFactory) {
         })
     }
 
+    $scope.openEditModal = function(){
+        $scope.editedPin = this.item;
+        $('#editPin').modal('show');
+
+    }
+
+    $scope.editPin = function(){
+        console.log($scope.editedPin);
+        FirebaseFactory.editPin($scope.editedPin.id, $scope.editedPin).then(function(){
+
+        })
+    }
+
+
 });
