@@ -89,6 +89,8 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
 			.then(function(data){
 				$window.location.url = "#!/login";
 				$scope.isLoggedIn = false;
+                $scope.isExploreView = false;
+
 			});
 		};
 
