@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a ng-show="!isLoggedIn" href="#" ng-click="loginGoogle()">Login with Google</a></li>
         <li><a ng-show="!isLoggedIn" href="#" data-toggle="modal" data-target="#loginRegister">Login/Register</a></li>
-        <li><a ng-show="isLoggedIn" ng-click="logout()" href="#!/logout">Logout</a></li>
+        <li><a ng-show="isLoggedIn" ng-click="logoutUser()" href="#!/">Logout</a></li>
         <li><a ng-show="isLoggedIn" href="#!/explore" ng-click="">Explore</a></li>
         <li><a ng-show="isLoggedIn" href="#!/{{user}}" ng-click="">Profile</a></li>
       </ul>
@@ -69,11 +69,11 @@
               <div>
                 Name: <input class="form-control" type="text" autofocus="true"  ng-model="profile.name">
               </div>
-              
+
             </section>
           </div>
           <div class="modal-footer">
-            
+
             <button class="btn btn-info" ng-click="createUser(profile)" data-dismiss="modal">Submit Name!</button>
           </div>
       </div><!-- /.modal-content -->
