@@ -1,7 +1,10 @@
-app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window, SearchTermData){
+
+app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $location, $window, $routeParams, SearchTermData){
+
 		//initialize navbar
 		$scope.account = { email: '', password: '' };
 		$scope.isLoggedIn = false;
+        $scope.myPath = $routeParams.userID;
 
         $scope.searchText = SearchTermData;
 
@@ -27,9 +30,13 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
                             uid: user
                         };
                     $('#createUser').modal('show')
+
                     }   
                 });       
-              }).catch(function(error) {
+                
+
+
+            }).catch(function(error) {
                 // Handle the Errors.
                 console.log("error with google login", error);
                 var errorCode = error.code;
@@ -68,7 +75,7 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
                             uid: user
                         };
                         $('#createUser').modal('show');
-                    }  
+                    }
                 })
 		    })
 		};

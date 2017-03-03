@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("PinterestApp", ["ngRoute"]);
+var app = angular.module("PinterestApp", ["ngRoute", "angular.filter", "angular-loading-bar"]);
 
 
 let isAuth = (AuthFactory) => new Promise ( (resolve, reject) => {
@@ -37,7 +37,6 @@ app.config(function($routeProvider){
         templateUrl: 'app/explore/explore.html',
         controller: "exploreCtrl"
     }).
-
     when('/:userID', {
         templateUrl: 'app/profile/profile.html',
         controller: "profileCtrl",

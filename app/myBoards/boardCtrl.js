@@ -20,7 +20,8 @@ app.controller('BoardCtrl', function ($scope, FirebaseFactory, AuthFactory) {
 
     $scope.makeNewBoard = function(){
         console.log("CLICKED Add New Board");
-		FirebaseFactory.createNewBoard($scope.newBoard).then(function(x){
+		FirebaseFactory.createNewBoard($scope.newBoard)
+        .then(function(x){
             console.log("X: ", x);
 			FirebaseFactory.getUserBoards(user).then(function(boardCollection){
                 $scope.boards = boardCollection;

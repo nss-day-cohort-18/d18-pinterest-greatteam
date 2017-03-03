@@ -20,6 +20,8 @@ app.controller("SingleBoardCtrl", function($scope, AuthFactory, FirebaseFactory,
             $scope.name = "404 Error!"
             $scope.errorMsg = "The page you were looking for either does not exist, or is not available to you."
             $scope.errorPresent = true;
+        }else if(Object.keys(boardPins).length === 0){
+            console.log("0000000000000000000");
         }else{
 
         	$scope.name = boardPins.boardName;
