@@ -37,7 +37,6 @@ app.config(function($routeProvider){
         templateUrl: 'app/explore/explore.html',
         controller: "exploreCtrl"
     }).
-
     when('/:userID', {
         templateUrl: 'app/profile/profile.html',
         controller: "profileCtrl",
