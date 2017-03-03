@@ -7,7 +7,7 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	/****************************/
 	/****** BOARD FUNCTIONS *****/
 	/****************************/
-	
+
 	// Retrieves all boards (for the logged in user)
 	let getUserBoards = () => {
 		let boards = [];
@@ -52,11 +52,6 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 		});
 
 	};
-
-
-
-
-
 
 
 
@@ -146,6 +141,14 @@ app.factory("FirebaseFactory", function($q, $http, AuthFactory, FBCreds){
 	// Gets a single board's pins
 	let getBoardPins = (boardID) => {
 		let pinCollection;
+
+		AuthFactory.isAuthenticated()
+		.then( function(userAuthenticated){
+			console.log("User Authenticated: ", userAuthenticated);
+		})
+		.catch( function(userNotAuthenticated){
+			console.log("NOT: ", userNotAuthenticated);
+		});
 
 		return $q((resolve, reject) => {
 			console.log("URL: ", `${FBCreds.databaseURL}/pins/${boardID}`);

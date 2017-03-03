@@ -13,21 +13,20 @@ app.controller('navbarCtrl', function($scope, FirebaseFactory, AuthFactory, $loc
                 var displayName = result.user.displayName;
                 console.log("DisplayName = ", result.user.displayName);
                 FirebaseFactory.checkUserExists(user).then(function(result){
-                	boolean = result;
+                    boolean = result;
                     if (boolean) {
-                    console.log("it is true");
-                    $scope.isLoggedIn = true;
-                    $location.path(`/${user}`);
-                } else {
-                    console.log("it is false");
-                    $scope.profile = {
-                        name: displayName,
-                        uid: user
-                    };
+                        console.log("it is true");
+                        $scope.isLoggedIn = true;
+                        $location.path(`/${user}`);
+                    } else {
+                        console.log("it is false");
+                        $scope.profile = {
+                            name: displayName,
+                            uid: user
+                        };
                     $('#createUser').modal('show')
-                }   
-                })
-                          
+                    }   
+                });       
               }).catch(function(error) {
                 // Handle the Errors.
                 console.log("error with google login", error);
