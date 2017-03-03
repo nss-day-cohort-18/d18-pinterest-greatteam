@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("PinterestApp", ["ngRoute"]);
+var app = angular.module("PinterestApp", ["ngRoute", "angular.filter"]);
 
 
 let isAuth = (AuthFactory) => new Promise ( (resolve, reject) => {

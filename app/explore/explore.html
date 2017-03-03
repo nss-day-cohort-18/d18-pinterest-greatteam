@@ -3,13 +3,41 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6 col-md-4" ng-repeat="item in pins">
+  <div class="col-sm-6 col-md-4" ng-repeat="item in pins | omit: userFilter">
     <div class="thumbnail">
       <img src="{{item.url}}" alt="{{item.title}}">
       <div class="caption">
         <h3>{{item.title}}</h3>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="addToMyPins()">Add</button>
+        <button type="button" class="btn-danger btn-xs" ng-click="openExploreModal()">Add to my Pins</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="explorePin">
+      <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add to Your Pins!</h4>
+          </div>
+          <div class="modal-body">
+            <section class="form-group">
+              <h4>Would you like to change any info?</h4>
+              <div>
+                Title: <input class="form-control" type="text" autofocus="true"  ng-model="explorePin.title">
+                Url: <input class="form-control" type="text" autofocus="true"  ng-model="explorePin.url">
+                Which board do you want to add your new pin to?
+                <select ng-model="explorePin.boardId">
+                  <option ng-repeat="item in boards" value="{{item.id}}">{{item.title}}</option>
+                </select>
+              </div> 
+            </section>
+          </div>
+          <div class="modal-footer">
+            
+            <button class="btn btn-primary" ng-click="addExplorePin()" data-dismiss="modal">Add to My Pins!</button>
+          </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
