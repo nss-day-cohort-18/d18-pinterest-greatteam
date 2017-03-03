@@ -4,7 +4,7 @@
 
 <div class="row">
 
-  <div class="col-sm-6 col-md-4" ng-repeat="item in pins | filter: searchText.search | omit: userFilter"">
+  <div class="col-sm-6 col-md-4" ng-repeat="item in pins | filter: searchText.search | omit: userFilter | unique: 'url'">
 
     <div class="thumbnail">
       <img src="{{item.url}}" alt="{{item.title}}">

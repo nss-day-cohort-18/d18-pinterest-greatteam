@@ -4,6 +4,8 @@ app.controller('exploreCtrl', function ($scope, FirebaseFactory, SearchTermData,
 
 	$scope.searchText = SearchTermData;
 
+
+
     $scope.user = AuthFactory.getUser();
 
     $scope.userFilter = function(item){
@@ -25,8 +27,9 @@ app.controller('exploreCtrl', function ($scope, FirebaseFactory, SearchTermData,
     };
 
     $scope.addExplorePin = function(){
-    	FirebaseFactory.createNewPin($scope.explorePin).then(function(){
-
+    	FirebaseFactory.createNewPin($scope.explorePin).then(function(){ 
     	})
-    }
+    };
+
+
 });
