@@ -30,4 +30,10 @@ app.controller('BoardCtrl', function ($scope, FirebaseFactory, AuthFactory) {
 		});	
     };
 
+    $scope.deleteBoard = function(index){
+        FirebaseFactory.deleteBoard(this.item.id).then(function(){
+            $scope.boards.splice(index, 1);
+        })
+    }
+
 });
